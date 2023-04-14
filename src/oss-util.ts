@@ -1,10 +1,9 @@
 import debuger from 'debug'
 import OSS from 'ali-oss'
 import { OSSOptions, UpTaskQueue } from './types'
+import OSS_CONFIG from './config'
 const debug = debuger('aliyun-oss-upload:main')
 const stores: { [key: string]: OSS } = {}
-const defaultRegion = 'oss-cn-shanghai'
-const maxRunningTaskCount = 20
 const queue: UpTaskQueue[] = []
 let taskCount = 0
 
@@ -22,7 +21,7 @@ function getStore(region: string, bucket: string) {
 }
 
 async function checkDelayTask() {
-  if (taskCount < maxRunningTaskCount) {
+  if (taskCount < OSS_CONFIG.MAX_RUNING_COUNT) {
     const task = queue.shift()
     if (task) {
       taskCount++
@@ -48,7 +47,7 @@ async function checkDelayTask() {
 
 function _upload(filePath: string, region: string, bucket: string, objPath: string, uploadOptions: OSSOptions, callback: Function) {
   if (!region) {
-    region = defaultRegion
+    region = OSS_CONFIG.DEFAULT_REGION
   }
   const store = getStore(region, bucket)
   queue.push({

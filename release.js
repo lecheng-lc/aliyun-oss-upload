@@ -30,7 +30,7 @@ function getNextVersion (version) {
  * 设置版本
  */
 function setPackageJsonVersion () {
-  const filePath = path.join(__dirname, '/../package.json')
+  const filePath = path.join(__dirname, './package.json')
   let pkg = fs.readFileSync(filePath).toString()
   pkg = JSON.parse(pkg)
   pkg.version = getNextVersion(pkg.version)
@@ -42,7 +42,7 @@ function setPackageJsonVersion () {
  * 设置CHANGELOG
  */
 function setChangeLog (newVersion) {
-  const filePath = path.join(__dirname, '/../CHANGELOG.md')
+  const filePath = path.join(__dirname, './CHANGELOG.md')
   let content = fs.readFileSync(filePath).toString()
   content = `\n${content}`
   let newContent = `# v${newVersion}\n`
