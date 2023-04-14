@@ -21,6 +21,14 @@
   },
   "homepage": "https://github.com/lecheng-lc/aliyun-oss-upload#readme",
   "dependencies": {
-    "ali-oss": "^6.17.1"
+    "ali-oss": "^6.17.1",
+    "mime": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/ali-oss": "^6.16.7",
+    "@types/debug": "^4.1.7",
+    "@types/mime": "^3.0.1",
+    "@types/node": "^18.15.11",
+    "debug": "^4.3.4"
   }
 }
