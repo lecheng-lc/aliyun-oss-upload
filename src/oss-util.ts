@@ -1,6 +1,6 @@
 import debuger from 'debug'
 import OSS from 'ali-oss'
-import { OSSOptions, UploadOptions, UpTaskQueue } from './types'
+import { OSSOptions, UpTaskQueue } from './types'
 const debug = debuger('aliyun-oss-upload:main')
 const stores: { [key: string]: OSS } = {}
 const defaultRegion = 'oss-cn-shanghai'
