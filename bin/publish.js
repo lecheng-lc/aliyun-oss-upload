@@ -1,5 +1,5 @@
 const commander = require('commander')
-const { publish } = require('./index')
+const { publish } = require('../src/index')
 const pkg = require('../package.json')
 
 function pick(object, props = []) {
