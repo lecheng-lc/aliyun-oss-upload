@@ -1,5 +1,5 @@
 const commander = require('commander')
-const { publish } = require('../src/index')
+const { publish } = require('../dist/index.js')
 const pkg = require('../package.json')
 
 function pick(object, props = []) {
@@ -32,6 +32,7 @@ function list(val) {
 commander
   .version(pkg.version)
   .description('A cli interface of publish static resource to ali-oss.')
+  .option('-h, --help', '查看命令')
   .option('-t, --test <test>', 'auto set default bucktet, 0 with bucket:xxx, 1 with bucket:xxxx, default: 1', parseInt)
   .option('-p, --basePath <basePath>', 'the basePath of publish resource, default to /build/other')
   .option('-d, --distPath <distPath>', 'the entry of publish resource, default to ./dist')
@@ -44,5 +45,4 @@ const options = pick(
   commander,
   ['config', 'id', 'secret', 'bucket', 'region', 'distPath', 'basePath', 'ignoreNames', 'enableHttpCache', 'httpCacheIgnoreNames']
 )
-
-publish(options)
+// publish(options)
