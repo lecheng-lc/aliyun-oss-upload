@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "前端直传阿里云oss",
   "main": "index.js",
+  "type": "module",
+  "types": "./dist/index.d.ts",
   "bin": {
     "static-publish": "./bin/publish.js"
   },
@@ -33,6 +35,7 @@
     "@types/debug": "^4.1.7",
     "@types/mime": "^3.0.1",
     "@types/node": "^18.15.11",
+    "chalk": "^5.2.0",
     "commander": "^10.0.0",
     "date-fns": "^2.29.3",
     "debug": "^4.3.4",

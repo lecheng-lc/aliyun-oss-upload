@@ -1,7 +1,7 @@
 import debuger from 'debug'
 import OSS from 'ali-oss'
 import { OSSOptions, UpTaskQueue } from './types'
-import OSS_CONFIG from './config'
+import OSS_CONFIG from './config.js'
 const debug = debuger('aliyun-oss-upload:main')
 const stores: { [key: string]: OSS } = {}
 const queue: UpTaskQueue[] = []
@@ -11,8 +11,8 @@ function getStore(region: string, bucket: string) {
   const key: string = region + bucket
   if (!stores.hasOwnProperty(key)) {
     stores[key] = new OSS({
-      accessKeyId: 'xxx',
-      accessKeySecret: 'xxx',
+      accessKeyId: OSS_CONFIG.ACCESS_KEY_ID,
+      accessKeySecret: OSS_CONFIG.ACCESS_KEY_SECRET,
       bucket: bucket,
       region: region
     })

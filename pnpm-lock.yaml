@@ -6,6 +6,7 @@ specifiers:
   '@types/mime': ^3.0.1
   '@types/node': ^18.15.11
   ali-oss: ^6.17.1
+  chalk: ^5.2.0
   commander: ^10.0.0
   date-fns: ^2.29.3
   debug: ^4.3.4
@@ -21,6 +22,7 @@ devDependencies:
   '@types/debug': 4.1.7
   '@types/mime': 3.0.1
   '@types/node': 18.15.11
+  chalk: 5.2.0
   commander: 10.0.0
   date-fns: 2.29.3
   debug: 4.3.4
@@ -160,6 +162,11 @@ packages:
       function-bind: 1.1.1
       get-intrinsic: 1.2.0
     dev: false
+
+  /chalk/5.2.0:
+    resolution: {integrity: sha512-ree3Gqw/nazQAPuJJEy+avdl7QfZMcUvmHIKgEZkGL+xOBzRvup5Hxo6LHuMceSxOabuJLJm5Yp/92R9eMmMvA==}
+    engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
+    dev: true
 
   /commander/10.0.0:
     resolution: {integrity: sha512-zS5PnTI22FIRM6ylNW8G4Ap0IEOyk62fhLSD0+uHRT9McRCLGpkVNvao4bjimpK/GShynyQkFFxHhwMcETmduA==}

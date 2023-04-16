@@ -2,7 +2,8 @@ import fs from 'fs'
 import path from 'path'
 import mime from 'mime'
 import { GetAllFilesCallBack, OSSOptions, PublishOss, UploadOptions } from './types'
-import ossUpload from './oss-util'
+import ossUpload from './oss-util.js'
+import OssConfig from './config.js'
 function getAllFiles(dirPath: string, cb: GetAllFilesCallBack) {
   fs.readdir(dirPath, function (err, files) {
     if (err) {
@@ -73,6 +74,13 @@ function getAllFiles(dirPath: string, cb: GetAllFilesCallBack) {
   })
 }
 
+/**
+ * @param filePath  文件路径
+ * @param bucket  使用的bucket
+ * @param ossPath 使用的上传的oss路径
+ * @param uploadOptions  使用oss上传的参数
+ * @param callback  回调方法
+ */
 function uploadFile(filePath:string, bucket:string, ossPath:string, uploadOptions: OSSOptions, callback:(status: boolean, err?:any)=>void) {
   ossUpload(filePath, '', bucket, ossPath, uploadOptions, function (err, res) {
     if (err) {
@@ -86,7 +94,7 @@ function uploadFile(filePath:string, bucket:string, ossPath:string, uploadOption
 
 /**
  * 发布文件夹
- * @param {*} config 
+ * @param {*} config UploadOptions
  * @param {*} cb 
  */
 function publish(config: UploadOptions, cb:(err:any,stats:any)=>void) {
@@ -106,9 +114,9 @@ function publish(config: UploadOptions, cb:(err:any,stats:any)=>void) {
       'cache-control': 'public,max-age=31536000,immutable' // 缓存1年，参考facebook的静态文件设置
     }
   }
-  let bucket = 'xxx'
+  let bucket = OssConfig.BUCKET
   if (config && config.hasOwnProperty('test') && !config.test) {
-    bucket = 'xxxx'
+    bucket = OssConfig.BUCKET
   }
   distPath = path.resolve(distPath)
   const divider = '----------------------------------------'
@@ -124,7 +132,6 @@ function publish(config: UploadOptions, cb:(err:any,stats:any)=>void) {
         const errorFilePaths:string[] = []
         filePaths.forEach(function (filePath) {
           const ossPath = filePath.replace(distPath, basePath).replace(/\\/g, '/')
-          console.log(filePath, '----', ossPath, '---', distPath, '----', basePath)
           const filename = path.basename(filePath)
           if (ignoreNames.indexOf(filename) === -1) {
             allCount++
@@ -173,16 +180,16 @@ function publish(config: UploadOptions, cb:(err:any,stats:any)=>void) {
  * @param {*} config 
  * @param {*} cb 
  */
-function upload(config: PublishOss, cb: (err:any, stats: any) => void) {
+function upload(config: PublishOss, cb: (err:any, stats?: any) => void) {
   let filePath = config.filePath ? config.filePath : ''
   let objPath = config.objPath ? config.objPath : ''
-  let bucket = 'xxxx'
+  let bucket = OssConfig.BUCKET
   if (config && config.hasOwnProperty('test') && !config.test) {
-    bucket = 'xxx'
+    bucket = OssConfig.BUCKET
   }
   filePath = path.resolve(filePath)
   if (!filePath) {
-    return callback(new Error('filePath is empty!'))
+    return cb(new Error('filePath is empty!'))
   }
   if (!objPath) {
     objPath = '/build/other/' + path.basename(filePath)
@@ -212,8 +219,4 @@ function upload(config: PublishOss, cb: (err:any, stats: any) => void) {
 export {
   publish,
   upload
-}
-
-function callback(arg0: Error) {
-  throw new Error('Function not implemented.')
 }
