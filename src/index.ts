@@ -3,7 +3,6 @@ import path from 'path'
 import mime from 'mime'
 import { GetAllFilesCallBack, OSSOptions, PublishOss, UploadOptions } from './types'
 import ossUpload from './oss-util'
-
 function getAllFiles(dirPath: string, cb: GetAllFilesCallBack) {
   fs.readdir(dirPath, function (err, files) {
     if (err) {
