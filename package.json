@@ -1,5 +1,5 @@
 {
-  "name": "aliyun-oss-upload",
+  "name": "aliyun-oss-upload-multiple",
   "version": "1.0.0",
   "description": "前端直传阿里云oss",
   "main": "index.js",
